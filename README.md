@@ -1,10 +1,11 @@
-使用Qt 6.5.1 + Visual Studio 2022.
+使用Qt 6.5.3 + Visual Studio 2022.
 
 图片素材和音频素材均来自游戏《逆转裁判》和《逆转检事》.
 
-b站有演示：https://www.bilibili.com/video/BV1Rz42187m2/
+这是原作者的b站演示：https://www.bilibili.com/video/BV1Rz42187m2/
+我做了高清版本的桌宠，b站演示链接https://www.bilibili.com/video/BV1MFdZYsEvr/?share_source=copy_web&vd_source=4e1f5a80e26a44a2d0bb8612a4952199
+终于是学会git上传了（笑）
 
-这是我第一次从零开始一个项目一直到发布，还有很多不完善的地方，请大家多多包涵。在这里记录一下实现的内容和一点心得:
 
 0. 窗口（桌宠本体）无边框透明置顶，不在任务栏显示（Qt::Tool），在状态栏显示(QSystemTrayIcon)，拖拽移动窗口.
     注意窗口类型设置为Qt::Tool之后关闭窗口不会退出程序，我的解决方法是重写`closeEvent()`关闭时发送信号给QApplication，让它执行`quit()`
