@@ -2,8 +2,6 @@
 
 图片素材和音频素材均来自游戏《逆转裁判》和《逆转检事》.
 
-这是原作者的b站演示：https://www.bilibili.com/video/BV1Rz42187m2/
-
 
 我做了高清版本的桌宠，b站演示链接https://www.bilibili.com/video/BV1MFdZYsEvr/?share_source=copy_web&vd_source=4e1f5a80e26a44a2d0bb8612a4952199
 终于是学会git上传了（笑）
