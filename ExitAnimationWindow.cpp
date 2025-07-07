@@ -41,50 +41,28 @@ void ExitAnimationWindow::setupAnimation()
     connect(exitMovie, &QMovie::finished, this, &QWidget::close);
 }
 
-
 void ExitAnimationWindow::playExitAnimation(QWidget* parent)
 {
     ExitAnimationWindow* window = new ExitAnimationWindow(nullptr);
 
-    // 原始GIF尺寸和宽高比
-    const int originalWidth = 1800;
-    const qreal originalHeight = 1011.6;
-    const qreal aspectRatio = originalWidth / originalHeight;
-
-    // 获取屏幕尺寸
+    // 设置窗口尺寸（根据实际GIF尺寸调整）
+    const int gifWidth = 1800;
+    const int gifHeight = 1011.6;
+    window->setFixedSize(gifWidth, gifHeight);
+    // 居中显示
     QScreen* screen = QApplication::primaryScreen();
     QRect screenRect = screen->geometry();
-
-    // 计算自适应尺寸（保持宽高比）
-    int maxWidth = screenRect.width() - 100;         // 横向留出边距
-    int maxHeight = static_cast<int>((screenRect.height() - 45) * 0.95); // 底部留45像素空间
-
-    int newWidth = qMin(originalWidth, maxWidth);
-    int newHeight = static_cast<int>(newWidth / aspectRatio);
-
-    // 如果高度超出限制则重新计算
-    if (newHeight > maxHeight) {
-        newHeight = maxHeight;
-        newWidth = static_cast<int>(newHeight * aspectRatio);
-    }
-
-    window->setFixedSize(newWidth, newHeight);
-
-    // 保持左下对齐（左边缘对齐，底部留45像素）
+    // 左对齐 + 下边缘对齐
     int x = 0;
-    int y = screenRect.height() - newHeight - 45;
+    int y = screenRect.height() - gifHeight - 45;
     window->move(x, y);
 
     window->show();
     window->exitMovie->start();
-
-    QTimer::singleShot(2500, window, &QWidget::close);
-
-    // 事件循环保持阻塞直到动画完成
+    QTimer::singleShot(2500, window, &QWidget::close);  // 添加这一行
+    // 创建事件循环等待动画完成
     QEventLoop loop;
     QObject::connect(window, &ExitAnimationWindow::destroyed, &loop, &QEventLoop::quit);
     loop.exec();
 
-
 }
-
